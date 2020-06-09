@@ -11,7 +11,7 @@ public:
                 else{ ++it;}
             }else{break;}
         }
-        return nums.end() - nums.begin();*/
+        return nums.end() - nums.begin();
     }
 }
 
@@ -19,14 +19,17 @@ public:
 
 	int count{0};
         for(int i = 1; i < nums.size(); ++i){
-            if(nums[i] == nums [i-1]) { ++count; }//有重复count++;
+	    //有重复count++;
+            if(nums[i] == nums [i-1]) { ++count; }
             else{
-                nums[i-count] = nums[i];//不相等就赋值给前面的
+		//不相等就赋值给前面的
+                nums[i-count] = nums[i];
             }
         }
-        return nums.size() - count;//运行结束之后vector的size不变，只是需要的元素前移，并没有删除
+	//运行结束之后vector的size不变，只是需要的元素前移，并没有删除
+        return nums.size() - count;
 
 ///solution 3 (12 ms)
-//删除元素
+	//删除元素
        return distance(nums.begin(),unique(nums.begin(), nums.end()));
 
