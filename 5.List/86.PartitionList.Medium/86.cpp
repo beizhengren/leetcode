@@ -1,3 +1,13 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 
 //solution 1
 class Solution {
@@ -23,7 +33,40 @@ public:
 
             }
         }
-        return dummy -> next;
+        auto res = dummy->next;
+        delete dummy;
+        return res;
     }
 };
 
+///solution 2
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        ListNode* head1 = new ListNode(0);
+        ListNode* head2 = new ListNode(0);
+        ListNode* h1 = head1;
+        ListNode* h2 = head2;
+        
+        while(head){
+            if(head->val < x){
+                // next intialzed value is nullptr, so assign value. point to head
+                head1->next = head;
+                head1 = head1->next;
+            }else{
+                head2->next = head;
+                head2 = head2->next;
+            }
+            head = head->next;
+        }
+        
+        head2->next = nullptr;
+        head1->next = h2->next;
+        auto res = h1->next;
+        delete h1;
+        delete h2;
+        return res;
+        
+    }
+    
+};
