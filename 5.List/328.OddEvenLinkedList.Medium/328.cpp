@@ -48,16 +48,16 @@ public:
 class Solution {
 public:
        ListNode* oddEvenList(ListNode* head) {
-        if(!head) return head;
+        if(!head) return head;//空直接返回
         ListNode *odd=head, *evenhead=head->next, *even = evenhead;
         while(even && even->next)
         {
-            odd->next = odd->next->next;
-            even->next = even->next->next;
+            odd->next = odd->next->next;//下一个的下一个
+            even->next = even->next->next;//下一个的下一个
             odd = odd->next;
             even = even->next;
         }
-        odd->next = evenhead;
+        odd->next = evenhead;//将奇表的尾指向偶表的头
         return head;
     }
 };
