@@ -5,7 +5,7 @@ public:
         for(int i = 0; i < points.size(); ++i){
             unordered_map<int, int> m1;
             for(int j = 0; j < points.size(); ++j){
-                if(j!=i)
+                if(j!=i)//must j!=i instead of j = i+1, becasue of j should calculate all the nums around it.
                     m1[distance(points[i], points[j])]++;
             }
 
