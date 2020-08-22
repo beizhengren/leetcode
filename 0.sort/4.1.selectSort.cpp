@@ -3,7 +3,7 @@
 #include <array>
 #include <iostream>
 using namespace std;
-// 由于寻找最小元的时候是两两比较,复杂度高
+// 由于寻找最小元的时候是两两比较,复杂度高.也是选择排序的瓶颈.
 // 最坏 O( N^2 )
 // 平均 O( N^2 )
 // 即 theta = O( N^2 )
