@@ -21,10 +21,28 @@ void insertSort(T& arr, int n){
     }
 }
 
+template <typename T>
+void insertSort2(T& arr, int n){
+    for(int i = 1; i < n; ++i){
+        auto tmp = arr[i];//必须用tmp保存arr[i],因为在移动前面的元素的时候原数组会被覆盖.
+        int idx = i;
+        for( ; idx > 0 && tmp < arr[idx-1]; --idx ){
+                arr[idx] = arr[idx-1];
+        }
+        arr[idx] = tmp;
+    }
+}
+
+template <typename T>
+void printArr(T arr, int n){
+    for(int i = 0; i < n; ++i){
+        cout << arr[i] << endl;
+    }
+}
+
 int main (){
     array arr = {0, 5, 3, 2, 1, 9, 6, 7, 8};
-    insertSort(arr, arr.size());
-    for(const auto& a:arr){
-        cout << a << endl;
-    }
+    //insertSort(arr, arr.size());
+    insertSort2(arr, arr.size());
+    printArr(arr, arr.size());
 }
