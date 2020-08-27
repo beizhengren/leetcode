@@ -43,7 +43,7 @@ void mergeSort(int arr[], int n) {
 	int* tmp = new int[n] {0};
 	if (tmp != nullptr) {
 		merge(arr, 0, n - 1, tmp);
-		delete tmp;
+		delete []tmp;
 	}
 	else {
 		cerr << "out of memory space" << endl;
