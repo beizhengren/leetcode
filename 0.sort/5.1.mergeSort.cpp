@@ -1,16 +1,18 @@
+//递归版本
+//T( N ) = O( N logN )， 稳定
 #include<iostream>
 using namespace std;
 //merge two sorted sub array
 void mergeSubArr(int arr[], int l, int m, int r, int arrTmp[]) {
-	int size = r - l + 1;
+	int size = r - l + 1;//注意size的大小
 
 	int i = l, j = m + 1;
 	int idx = l;//注意，这里起点是L，关系到递归的时候每次访问数组中的元素。
-	while ( i <=m && j <= r) {
+	while (i <= m && j <= r) {
 		if (arr[i] < arr[j]) {
 			arrTmp[idx++] = arr[i++];
 		}
-		else{
+		else {
 			arrTmp[idx++] = arr[j++];
 		}
 	}
@@ -39,8 +41,14 @@ void merge(int arr[], int l, int r, int tmp[]) {
 
 void mergeSort(int arr[], int n) {
 	int* tmp = new int[n] {0};
-	merge(arr, 0, n - 1, tmp);
-	delete tmp;
+	if (tmp != nullptr) {
+		merge(arr, 0, n - 1, tmp);
+		delete tmp;
+	}
+	else {
+		cerr << "out of memory space" << endl;
+	}
+	;
 }
 
 void printArr(int arr[], int n) {
