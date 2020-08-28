@@ -36,6 +36,7 @@ void mergePass(int arr[], int n, int length, int arrTmp[]) {
 	//从左到右一对儿一对儿的调用mergeSubArr
 	//length是当前有序子列的长度。
 	//i+=2*length,跳过两个子列，去找下一对儿。
+	//n - 2*length = (n-1) - 2*length + 1; 注意这里是小于等于
 	for (i = 0; i <= n - 2 * length; i += 2 * length) {
 		mergeSubArr2(arr, i, i + length -1, i + 2 * length - 1, arrTmp);
 	}
@@ -47,7 +48,7 @@ void mergePass(int arr[], int n, int length, int arrTmp[]) {
 		for (j = i; j < n; ++j) {
 			arrTmp[j] = arr[j];
 		}
-
+		/*此处用i++ = i++不可以*/
 	}
 }
 
