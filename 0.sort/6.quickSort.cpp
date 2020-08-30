@@ -1,110 +1,76 @@
-#include <iostream>
+/// https://blog.csdn.net/weixin_42861545/article/details/94404457#commentBox
+#include<iostream>
 using namespace std;
-// https://blog.csdn.net/weixin_42861545/article/details/94404457#commentBox
 
-/****************************************
-void bubbleSort(int *a, const int &n);
-// Uniform interface
-void quickSort(int *a, const int &n);
-// Core recursion function
-void qSort(int *a, int left, int right);
-int median3(int* arr, int left, int right);
-void swap(int& a, int& b);
-*****************************************/
-
-// Time complexity best case: n, worst case: n^2
-void bubbleSort(int *a, const int &n){
-    int flag = 0;
-    int tmp = 0;
-    for (int p = n - 1; p; p--){
-        flag = 0;
-        for (int i = 0; i < p; i++){
-            if (a[i] > a[i + 1]){
-                tmp = a[i];
-                a[i] = a[i + 1];
-                a[i + 1] = tmp;
-                flag = 1;  // Identification has exchanged
-            }
-            if (flag == 0){
-                break;
-            }
-        }  // of for i
-    }  // of for p
-}  // of function
-
-void swap(int& a, int& b){
-    int tmp = a;
-    a = b;
-    b = tmp;
+template <typename T>
+void printArr(T arr[], int n) {
+	for (int i = 0; i < n; ++i)
+		cout << arr[i] << endl;
+}
+template <typename T>
+void bubbleSort(T arr[], int n) {
+	for (int j = n - 1; j >= 0; --j) {
+		bool isSorted = false;
+		for (int i = 0; i < j; ++i) {
+			if (arr[i] > arr[i + 1]) {
+				isSorted = true;
+				swap(arr[i], arr[i + 1]);
+			}
+		}
+		if (isSorted) break;
+	}
+	
 }
 
-int median3(int arr[], int left, int right){
-    int center = left + (right - left) / 2;  // Use this form to prevent overflow
-    if (arr[left] > arr[center]){
-        swap(arr[left], arr[center]);
-    }
-    if (arr[left] > arr[right]){
-        swap(arr[left], arr[right]);
-    }
-    if (arr[center] > arr[right]){
-        swap(arr[center], arr[right]);
-    }
-    // In this time, arr[left] <= arr[center] <= arr[right]
-    // Hide the pivot on the position of right-1
-    swap(arr[center], arr[right - 1]);
-    return arr[right - 1];
+template <typename T>
+T medain3(T arr[], int l, int r) {
+	int center = l + (r - l) / 2;
+	if (arr[l] > arr[center]) swap(arr[l], arr[center]);
+	if (arr[l] > arr[r])swap(arr[l], arr[r]);
+	if (arr[center]>arr[r])swap(arr[center], arr[r]);
+	// In this time, arr[left] <= arr[center] <= arr[right]
+	// Hide the pivot on the position of right - 1
+	swap(arr[center], arr[r - 1]);
+	return arr[r - 1];
 }
 
-// Core recursion function
-void qSort(int *a, int left, int right){
-    int pivot = 0;
-    int cutoff = 2;//最小是2
-    int low = 0;
-    int high = 0;
-
-    // If the sequence elements are suffciently large, use quick sort
-    if (cutoff <= right - left)	{
-
-        pivot = median3(a, left, right);
-        low = left;
-        high = right - 1;
-        while (1)		{
-            // Move the sequence smaller than the reference to the left
-            // and the big to the right
-            while (a[++low] < pivot);
-            while (a[--high] > pivot);
-            if (low < high){
-                swap(a[low], a[high]);
-            }else{
-                break;
-            }
-        }
-        // Change the pivot to the correct position
-        swap(a[low], a[right - 1]);
-        qSort(a, left, low - 1);
-        qSort(a, low + 1, right);
-    }
-        // If there's too few elements, use simple sort
-    else{
-        bubbleSort(a + left, right - left + 1);
-    }
+template <typename T>
+void qSort(T arr[], int left, int right) {
+	int cutoff = 2;//最小是2
+	// If the sequence elements are suffciently large, use quick sort
+	if (cutoff <= right - left) {
+		T pivot = medain3(arr, left, right);
+		int low = left, high = right - 1;
+		while (1) {
+			// Move the sequence smaller than the reference to the left
+			// and the big to the right
+			while (arr[++low] < pivot);
+			while (arr[--high] > pivot);
+			if (low < high) {
+				swap(arr[low], arr[high]);
+			}
+			else break;
+		}
+		// Find the position `low` to place pivot
+		// Change the pivot to the correct position
+		swap(arr[low], arr[right - 1]);
+		qSort(arr, left, low-1);
+		qSort(arr, low + 1, right);
+	} 
+	// If there's too few elements, use simple sort
+	else {
+		bubbleSort(arr + left, right - left + 1);
+	}
 }
 
-// Uniform interface
-void quickSort(int *a, const int &n){
-    qSort(a, 0, n - 1);
+template <typename T>
+void quickSort(T arr[], int n) {
+	qSort(arr, 0, n - 1);
 }
 
-
-int main(){
-    int a[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-    for (int i = 0; i < 10; i++){
-        cout << a[i] << " ";
-    }
-    cout << endl;
-    quickSort(a, 10);
-    for (int i = 0; i < 10; i++){
-        cout << a[i] << " ";
-    }
-    return 0;
+int main() {
+	int arr[] = { 1, 2, 3, 4, 5, 0, 6, 7, 8, 9 };
+	int n = sizeof(arr) / sizeof(int);
+	quickSort(arr, n);
+	printArr(arr, n);
 }
