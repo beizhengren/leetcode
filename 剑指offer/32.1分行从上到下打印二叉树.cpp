@@ -27,8 +27,7 @@ public:
                     if(root->right != nullptr)
                         q.push(root->right);
                 }
-                if(!resOne.empty())//resOne中有值的时候才保存
-                    res.push_back(resOne);
+                res.push_back(resOne);
             }
             return res;
         }
