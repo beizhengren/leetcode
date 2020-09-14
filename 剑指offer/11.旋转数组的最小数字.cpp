@@ -14,7 +14,7 @@ private:
         
         while(beg<end){//因为终止是end - beg ==1。或者arr[beg]>=arr[end].
             if(end - beg == 1) return arr[end];//相差为1的时候找到（严格递增）
-            int mid = beg + (end-beg)>>2;//防止越界
+            int mid = beg + (end-beg)/2;//防止越界
             if(arr[beg] <= arr[mid]){
                 beg = mid;
             }
