@@ -35,7 +35,7 @@ private:
 };
 
 
-//2.先排序, 将相同的元素放在一起. 相同的时候不交换
+//2.相同的时候不交换
 //https://zhuanlan.zhihu.com/p/58927978
 class Solution {
 public:
@@ -46,7 +46,7 @@ public:
         }
         PermutationCore(str, 0);
         //对结果进行排序，因为可能存在重复，所以需要先排序，将重复的字符集合在一起
-        sort(result.begin(), result.end());
+        sort(result.begin(), result.end());//实际实验,不做sort也可以通过测试用例
         return result;
     }    
 
