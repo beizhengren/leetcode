@@ -60,7 +60,7 @@ void heapify(T& arr, int n, int i) {
 template<typename T>
 void heapSort(T& arr, int n) {
 	for (int i = n / 2 - 1; i >= 0; --i) {
-		heapify(arr, n, i);//此处i是index，每次需要减1.
+		heapify(arr, n, i);//此处i是index,是以当前非叶子节点为树根。每次需要减1，向前调整堆.
 	}
 	
 	//此处i是个数参数。因此最小是1.
