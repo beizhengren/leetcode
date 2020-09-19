@@ -32,7 +32,7 @@ void merge(int arr[], int l, int r, int tmp[]) {
 		mid = l + (r - l) / 2;//防止越界
 		merge(arr, l, mid, tmp);
 		merge(arr, mid + 1, r, tmp);
-		mergeSubArr(arr, l, mid, r, tmp);
+		mergeSubArr(arr, l, mid, r, tmp);//要mid为了确定两个子数组的首尾。
 	}
 }
 
