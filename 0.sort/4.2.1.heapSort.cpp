@@ -10,25 +10,24 @@ void heapify(T& arr, int n, int i) {
 #if RECURSIVE==0
 	cout << "not recursive" << endl;
 	int parent, child;
-  //2 * parent + 1 < n 也可以
-	for (parent = i; parent < n; parent = child) {
-		int cl = 2 * parent + 1;
-		int cr = 2 * parent + 2;
+	for (parent = idx; parent < n; parent = child) {
+		int cl = 2 * parent + 1; 
 		child = cl;
+		int cr = 2 * parent + 2;
 		if (cl < n) {
 			if (cr < n) {
 				if (arr[cl] < arr[cr])
 					child = cr;
 			}
 
-			if (arr[parent] >= arr[child]) {
-				break;
-			}
-			else {
+			if (arr[parent] < arr[child]) {
 				swap(arr[parent], arr[child]);
 			}
+			else {
+				break;
+			}
 		}
-
+		else break;
 	}
 #else
 	cout << "recursive" << endl;
