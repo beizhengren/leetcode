@@ -58,6 +58,7 @@ void mergeSort(int arr[], int n) {
 	int length = 1;//初始化子序列的长度
 
 	if (arrTmp != nullptr) {
+		//自底向上，步长length=1开始进行归并，每次归并两趟。
 		//每次循环做两次mergePass，保证跳出循环结果肯定是存在arr中的。
 		while (length < n) {
 			mergePass(arr, n, length, arrTmp);//arr中的结果倒到 arrTmp
