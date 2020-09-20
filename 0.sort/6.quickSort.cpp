@@ -31,7 +31,7 @@ void bubbleSort(T arr[], int n) {
 				swap(arr[i], arr[i + 1]);
 			}
 		}
-		if (isSorted) break;
+		if (isSorted==false) break;//如果没有被置成true，说明没有被交换，跳出
 	}
 
 }
