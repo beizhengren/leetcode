@@ -2,13 +2,6 @@
 // Created by wyz on 20-11-17.
 //
 
-/*************************************************************************
-        > File Name: quick_sort_test.cpp
-        > Author: huguang
-        > Mail: hug@haizeix.com
-        > Created Time: 四  9/10 20:47:01 2020
- ************************************************************************/
-
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -45,3 +38,9 @@ int main() {
 #undef MAX_N
     return 0;
 }
+/*
+[    OK    ] quick_sort_v1 (1455 ms)
+[    OK    ] quick_sort_v1_opt (1445 ms)
+[    OK    ] quick_sort_vn (1648 ms)
+[    OK    ] quick_sort_vn_opt (1605 ms)
+*/
