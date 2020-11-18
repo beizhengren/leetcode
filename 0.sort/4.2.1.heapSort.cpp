@@ -6,50 +6,41 @@ using namespace std;
 //n is the max index of a completed tree, i is the root index of a sub tree
 //从index=i开始，以i为根节点，向下调整数组为一个堆
 template<typename T>
-void heapify(T& arr, int n, int i) {
+void heapify(T& arr, int totalNum, int rootIdx) {
 #if RECURSIVE==0
 	cout << "not recursive" << endl;
-	int parent, child;
-	for (parent = idx; parent < n; parent = child) {
-		int cl = 2 * parent + 1; 
-		child = cl;
-		int cr = 2 * parent + 2;
-		if (cl < n) {
-			if (cr < n) {
-				if (arr[cl] < arr[cr])
-					child = cr;
-			}
+	while(rootIdx < totalNum){
+        //记录根节点和左,右子节点中最大的节点的idx
+        int maxIdx = rootIdx;
+        int childL = rootIdx * 2 + 1;
+        int childR = rootIdx * 2 + 2;
 
-			if (arr[parent] < arr[child]) {
-				swap(arr[parent], arr[child]);
-			}
-			else {
-				break;
-			}
-		}
-		else break;
-	}
+        if(childL < totalNum && arr[childL] > arr[maxIdx]){ maxIdx = childL;}
+        if(childR < totalNum && arr[childR] > arr[maxIdx]){ maxIdx = childR;}
+        if(maxIdx != rootIdx){
+            swap(arr[rootIdx], arr[maxIdx]);
+            rootIdx = maxIdx;
+        }else{
+            break;
+        }
+    }
 #else
 	cout << "recursive" << endl;
-	int largest = i; // Initialize largest as root 
-	int l = 2 * i + 1; // left = 2*i + 1 
-	int r = 2 * i + 2; // right = 2*i + 2 
+    	int largest = rootIdx; // Initialize largest as root
+	int l = 2 * rootIdx + 1; // left = 2*rootIdx + 1
+	int r = 2 * rootIdx + 2; // right = 2*rootIdx + 2
 
-	// If left child is larger than root 
-	if (l < n && arr[l] > arr[largest])
-		largest = l;
+	// If left child is larger than root
+	if (l < totalNum && arr[l] > arr[largest]){ largest = l;}
 
-	// If right child is larger than largest so far 
-	if (r < n && arr[r] > arr[largest])
-		largest = r;
+	// If right child is larger than largest so far
+	if (r < totalNum && arr[r] > arr[largest]){ largest = r;}
 
-	// If largest is not root 
-	if (largest != i)
-	{
-		swap(arr[i], arr[largest]);
-
-		// Recursively heapify the affected sub-tree 
-		heapify(arr, n, largest);
+	// If largest is not root
+	if (largest != rootIdx)	{
+		swap(arr[rootIdx], arr[largest]);
+		// Recursively heapify the affected sub-tree
+		heapify(arr, totalNum, largest);
 	}
 #endif // !RECURSIVE
 
