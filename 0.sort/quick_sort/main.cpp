@@ -14,6 +14,7 @@
 #include <vector>
 #include "my_test.hpp"
 #include "quick_sort.hpp"
+#include "heap_sort.hpp"
 using namespace std;
 
 template <typename T> void printArr(T arr[], int n) {
@@ -23,10 +24,10 @@ template <typename T> void printArr(T arr[], int n) {
 
 int main() {
 
-/*    int arr1[] = { 1, 2, 3, 4, 5, 0, 6, 7, 8, 9 };
+    int arr1[] = { 1, 2, 3, 4, 5, 0, 6, 7, 8, 9 };
     int n = sizeof(arr1) / sizeof(int);
-    quick_sort_vn_opt(arr1, 0, n -1);
-    printArr(arr1, n);*/
+    heap_sort(arr1, 0, n);
+    printArr(arr1, n);
 
 #define MAX_N 10000000
     int *arr = getRandData(MAX_N);
@@ -34,13 +35,14 @@ int main() {
     TEST(quick_sort_v1_opt, arr, MAX_N);
     TEST(quick_sort_vn, arr, MAX_N);
     TEST(quick_sort_vn_opt, arr, MAX_N);
-
+    TEST(heap_sort, arr, MAX_N);
 #undef MAX_N
     return 0;
 }
 /*
-[    OK    ] quick_sort_v1 (1455 ms)
-[    OK    ] quick_sort_v1_opt (1445 ms)
-[    OK    ] quick_sort_vn (1648 ms)
-[    OK    ] quick_sort_vn_opt (1605 ms)
+[    OK    ] quick_sort_v1 (1418 ms)
+[    OK    ] quick_sort_v1_opt (1412 ms)
+[    OK    ] quick_sort_vn (1606 ms)
+[    OK    ] quick_sort_vn_opt (1567 ms)
+[    OK    ] heap_sort (4441 ms)
 */
