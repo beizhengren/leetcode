@@ -10,19 +10,19 @@ void heapify(T& arr, int totalNum, int rootIdx) {
 #if RECURSIVE==0
 	cout << "not recursive" << endl;
 	while(rootIdx < totalNum){
-        //记录根节点和左,右子节点中最大的节点的idx
-        int maxIdx = rootIdx;
-        int childL = rootIdx * 2 + 1;
-        int childR = rootIdx * 2 + 2;
+		//记录根节点和左,右子节点中最大的节点的idx
+		int maxIdx = rootIdx;
+		int childL = rootIdx * 2 + 1;
+		int childR = rootIdx * 2 + 2;
 
-        if(childL < totalNum && arr[childL] > arr[maxIdx]){ maxIdx = childL;}
-        if(childR < totalNum && arr[childR] > arr[maxIdx]){ maxIdx = childR;}
-        if(maxIdx != rootIdx){
-            swap(arr[rootIdx], arr[maxIdx]);
-            rootIdx = maxIdx;
-        }else{
-            break;
-        }
+		if(childL < totalNum && arr[childL] > arr[maxIdx]){ maxIdx = childL;}
+		if(childR < totalNum && arr[childR] > arr[maxIdx]){ maxIdx = childR;}
+		if(maxIdx != rootIdx){
+		    swap(arr[rootIdx], arr[maxIdx]);
+		    rootIdx = maxIdx;
+		}else{
+		    break;
+		}
     }
 #else
 	cout << "recursive" << endl;
