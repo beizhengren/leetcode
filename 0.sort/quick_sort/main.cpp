@@ -36,13 +36,15 @@ int main() {
     TEST(quick_sort_vn, arr, MAX_N);
     TEST(quick_sort_vn_opt, arr, MAX_N);
     TEST(heap_sort, arr, MAX_N);
+    TEST(merge_sort_test, arr, MAX_N);
 #undef MAX_N
     return 0;
 }
 /*
-[    OK    ] quick_sort_v1 (1418 ms)
-[    OK    ] quick_sort_v1_opt (1412 ms)
-[    OK    ] quick_sort_vn (1606 ms)
-[    OK    ] quick_sort_vn_opt (1567 ms)
-[    OK    ] heap_sort (4441 ms)
+[    OK    ] quick_sort_v1 (1407 ms)
+[    OK    ] quick_sort_v1_opt (1394 ms)
+[    OK    ] quick_sort_vn (1609 ms)
+[    OK    ] quick_sort_vn_opt (1564 ms)
+[    OK    ] heap_sort (4489 ms)
+[    OK    ] merge_sort_test (1970 ms)
 */
