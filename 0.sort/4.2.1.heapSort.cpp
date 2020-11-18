@@ -3,8 +3,12 @@
 #include<algorithm>
 using namespace std;
 #define RECURSIVE 0
-//n is the max index of a completed tree, i is the root index of a sub tree
-//从index=i开始，以i为根节点，向下调整数组为一个堆
+//totalNum is the max index of a completed tree, rootIdx is the root index of a sub tree
+//从rootIdx开始，以rootIdx为根节点，向下调整数组为一个堆
+
+//堆化:以当前节点 rootIdx为根的子树调整成最大堆.
+//totalNum是决定了整个一颗树中的节点总数,也就是最大堆对应的数组元素个数.
+//这样,在后面进行取堆顶元素的时候,可以每取一个元素,然后totalNum--,再堆化.
 template<typename T>
 void heapify(T& arr, int totalNum, int rootIdx) {
 #if RECURSIVE==0
