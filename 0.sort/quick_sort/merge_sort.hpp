@@ -2,8 +2,8 @@
 // Created by wyz on 20-11-18.
 //
 
-#ifndef QUICKSORT_MERGE_SORT_HPP
-#define QUICKSORT_MERGE_SORT_HPP
+#ifndef MERGE_SORT_HPP
+#define MERGE_SORT_HPP
 
 #include <vector>
 
@@ -14,6 +14,7 @@ void merge_sub(T* arr, int l, int mid, int r, T* arrTmp){
     int j = mid + 1;
 
     while(i <= mid && j <=r){
+        //注意，这里是if和else
         if(arr[i] < arr[j]){arrTmp[tmpIdx++] = arr[i++];}
         else {arrTmp[tmpIdx++] = arr[j++];}
     }
@@ -29,7 +30,7 @@ void merge_sub(T* arr, int l, int mid, int r, T* arrTmp){
 //因为需要merge的是子数组, 所以需要知道起始, 终止位置
 template<typename T>
 void merge(T*arr, int l, int r, T* arrTmp){
-    if(l < r)
+    if(l < r)//注意：递归终止条件是l>=r
     {
         int mid = l + ((r - l)>>1);
         merge(arr, l, mid, arrTmp);
@@ -49,4 +50,4 @@ void merge_sort_test(T* arr, int beg, int end){
     merge_sort(arr, end + 1);
 }
 
-#endif //QUICKSORT_MERGE_SORT_HPP
+#endif //MERGE_SORT_HPP
