@@ -49,7 +49,7 @@ void heapify_opt(T* arr, int totalNum, int rootIdx){
         if(childR < totalNum && arr[childR] > arr[maxIdx]){ maxIdx = childR;}
         if(maxIdx != rootIdx){
             swap(arr[rootIdx], arr[maxIdx]);
-            rootIdx = maxIdx;
+            rootIdx = maxIdx;//注意更新rootIdx
         }else{
             break;
         }
