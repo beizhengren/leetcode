@@ -13,13 +13,13 @@ private:
     vector<vector<int>> result; // 存放符合条件结果的集合
     vector<int> path; // 用来存放符合条件结果
 
-    //从startIdx，[startIdx, stratIdx + 1，...] 开始搜索，满足条件的所有组合
+    //从startIdx，闭区间[startIdx, stratIdx + 1，...] 开始搜索，满足条件的所有组合
     void backtracking(int n, int k, int startIndex) {
         if (path.size() == k) { 
             result.push_back(path); 
             return;
         }
-
+        //注意是<=n，闭区间
         for (int i = startIndex; i <= n; ++i) {
             path.push_back(i);
             //
