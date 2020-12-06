@@ -1,3 +1,4 @@
+//方法1
 class Solution {
 
 public:
@@ -27,4 +28,36 @@ private:
             path.pop_back();
         }
     }    
+};
+
+
+//方法2：剪枝
+class Solution {
+
+public:
+    vector<vector<int>> combine(int n, int k) {
+        res.clear();
+        resOne.clear();
+        backtracking(n, k, 1);
+        return res;
+    }
+
+private:
+    //从startIdx开始的所有组合
+    void backtracking(int n, int k, int startIdx) {
+        if (resOne.size() == k) {
+            res.push_back(resOne);            
+            return;
+        }
+        
+        //剪枝：剩余元素的个数n - i + 1 应该大于等于 还差的个数 k - resOne.size()
+        for (int i = startIdx;  n - i + 1 >=  k - resOne.size(); ++i) {
+            resOne.push_back(i);
+            backtracking(n, k, i + 1);
+            resOne.pop_back();
+        }
+    }
+
+    vector<vector<int>> res;
+    vector<int> resOne;
 };
