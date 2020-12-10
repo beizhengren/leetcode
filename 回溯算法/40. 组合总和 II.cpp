@@ -65,9 +65,9 @@ public:
     }
 private:
     void backtracking(vector<int>& candidates, int target, int sum, int startIndex) {
-        if (sum > target) {
+        /*if (sum > target) {
             return;
-        }
+        }*/
         
         if (sum == target) {
             result.push_back(path);
