@@ -1,3 +1,4 @@
+// Solution 1
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
@@ -24,6 +25,42 @@ private:
             path.push_back(candidates[i]);
             sum += candidates[i];
             //可以包含自己，所以index从i开始
+            backtracking(candidates, target, sum, i);
+            sum -= candidates[i];
+            path.pop_back();
+        }
+    }
+
+    vector<int> path;
+    vector<vector<int> > result;
+};
+
+// Solution 2
+// 排序后剪枝
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        if(candidates.empty()) {return result;}
+        //需要排序
+        sort(candidates.begin(), candidates.end());
+        backtracking(candidates, target, 0, 0);
+        return result;
+    }
+private:
+    void backtracking(vector<int>& candidates, int target, int sum, int index) {
+        if(sum > target) {
+            return;
+        }
+
+        if (sum == target) {
+            result.push_back(path);
+            return;
+        }
+
+        // 如果 sum + candidates[i] > target 就终止遍历
+        for (int i = index; i < candidates.size() && sum + candidates[i] <= target; ++i) {
+            path.push_back(candidates[i]);
+            sum += candidates[i];
             backtracking(candidates, target, sum, i);
             sum -= candidates[i];
             path.pop_back();
