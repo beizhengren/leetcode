@@ -7,6 +7,8 @@ public:
 
 private:    
     void backtracking(const vector<int>& nums, int startIdx) {
+        // 子集问题是遍历问题
+        //遍历所有的节点，包括空
         result.push_back(path);
 
         // if(startIdx >= nums.size()) {return;}
