@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         vector<bool> used(nums.size(), false);
-        // 去重必须排序！！！
+        //用used去重必须排序！！！
         sort(nums.begin(), nums.end());
         backtracking(nums, 0, used);
         return result;
