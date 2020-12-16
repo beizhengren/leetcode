@@ -16,6 +16,7 @@ public:
                 }
             }
         }
+        // 如果跳出循环，说明整个数组中没有升序对，那么整个数组就是降序的，需要整体reverse
         reverse(nums.begin(), nums.end());
     }
 };
