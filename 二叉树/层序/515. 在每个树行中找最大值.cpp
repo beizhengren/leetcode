@@ -9,6 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// Solution 1
+// BFS
 class Solution {
 public:
     vector<int> largestValues(TreeNode* root) {
@@ -34,4 +36,29 @@ public:
         }
         return result;
     }
+};
+
+// Solution 2
+// DFS
+class Solution {
+public:
+    vector<int> largestValues(TreeNode* root) {
+        if (root == nullptr) {return result;}
+        dfs (root, 0);
+        return result;
+    }
+private:
+    void dfs (TreeNode* node, int level) {
+        if (node == nullptr) {return;}
+        if (level == result.size()) {
+            result.emplace_back(INT_MIN);
+        }
+        if (node->val > result[level]) {
+            result[level] = node->val;
+        }
+        if (node->left) {dfs(node->left, level + 1);}
+        if (node->right) {dfs(node->right, level + 1);}
+    }
+
+    vector<int> result;
 };
