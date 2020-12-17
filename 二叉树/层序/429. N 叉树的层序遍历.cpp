@@ -19,7 +19,8 @@ public:
 */
 
 // 跟二叉树的区别在于，孩子节点用vector来保存，遍历的时候需要遍历整个vector
-
+// Solution 1
+// 层序遍历
 class Solution {
 public:
     vector<vector<int>> levelOrder(Node* root) {
@@ -46,4 +47,33 @@ public:
         }
         return result;
     }
+};
+
+// Solution2
+// DFS
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        if (root == nullptr) {return result;}
+        dfs(root, 0);
+        return result;
+    }
+
+private:
+    void dfs (Node* node, int level) {
+        if (node == nullptr) {return;}
+        // level + 1 = result.size(); level 是从0开始，相当于index
+        // level是0，对应result的size应该是1
+        if (level == result.size()) {
+            result.emplace_back(vector<int>{});
+        }
+        result[level].push_back(node->val);
+        for (auto& child : node->children) {
+            if (child != nullptr){
+                dfs(child, level+1);
+            }
+        }
+    }
+
+    vector<vector<int>> result;
 };
