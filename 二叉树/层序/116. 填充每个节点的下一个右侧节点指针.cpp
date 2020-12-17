@@ -76,7 +76,8 @@ private:
             // 每次最后都将next赋值为nullptr， 保证当前层最右侧的next为nullptr
             vecNext[level]->next = nullptr;
         }
-        if (node->left) {dfs(node->left, level + 1);}
-        if (node->right) {dfs(node->right, level + 1);}
+        // 递归终止条件有对nullptr的判断，因此这里可以不判断节点指针是否为nullptr
+        dfs(node->left, level + 1);
+        dfs(node->right, level + 1);
     }
 };
