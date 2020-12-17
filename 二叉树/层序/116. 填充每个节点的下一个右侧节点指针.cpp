@@ -54,3 +54,29 @@ public:
         return root;
     }
 };
+// Solution 2
+// DFS
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if (root == nullptr) {return nullptr;}
+        dfs(root, 0);  
+        return vecNext[0];
+    }
+private:
+    vector<Node*> vecNext;
+
+    void dfs (Node* node, int level) {
+        if (node == nullptr) {return;}
+        if (vecNext.size() == level) {
+            vecNext.push_back(node);
+        } else {
+            vecNext[level]->next = node;
+            vecNext[level] = vecNext[level]->next;
+            // 每次最后都将next赋值为nullptr， 保证当前层最右侧的next为nullptr
+            vecNext[level]->next = nullptr;
+        }
+        if (node->left) {dfs(node->left, level + 1);}
+        if (node->right) {dfs(node->right, level + 1);}
+    }
+};
