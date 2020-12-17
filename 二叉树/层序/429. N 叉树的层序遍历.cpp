@@ -60,6 +60,7 @@ public:
     }
 
 private:
+    // dfs要用level来记录是访问到了第几层
     void dfs (Node* node, int level) {
         if (node == nullptr) {return;}
         // level + 1 = result.size(); level 是从0开始，相当于index
@@ -68,10 +69,8 @@ private:
             result.emplace_back(vector<int>{});
         }
         result[level].push_back(node->val);
-        for (auto& child : node->children) {
-            if (child != nullptr){
-                dfs(child, level+1);
-            }
+        for (const auto& child : node->children) {
+            dfs(child, level+1);//如果child是nullptr会返回
         }
     }
 
