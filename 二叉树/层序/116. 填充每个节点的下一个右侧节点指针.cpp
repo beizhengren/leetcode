@@ -81,3 +81,34 @@ private:
         dfs(node->right, level + 1);
     }
 };
+
+// Solution 3
+// DFS
+
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if (root == nullptr) {return nullptr;}
+        dfs(root);  
+        return root;
+    }
+private:
+    void dfs (Node* node) {
+        if (node == nullptr) {return;}
+        // 更新左孩子的next
+        if (node->left) {
+            node->left->next = node->right;
+        }
+        // 更新右孩子的next
+        if (node->right) {
+            if (node->next) {
+                node->right->next = node->next->left;
+            } else {
+                node->right->next = nullptr;
+            }
+        }
+        //递归以左、右孩子为根
+        dfs (node->left);
+        dfs (node->right);
+    }
+};
