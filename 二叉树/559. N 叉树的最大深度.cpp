@@ -42,3 +42,16 @@ private:
         return 1 + result;
     }
 };
+
+// 或者
+class Solution {
+public:
+    int maxDepth(Node* root) {
+        if (root == nullptr) {return 0;}
+        int result = 0;
+        for (int i = 0; i < root->children.size(); ++i) {
+            result = max (result, maxDepth(root->children[i]));
+        }
+        return 1 + result;
+    }
+};
