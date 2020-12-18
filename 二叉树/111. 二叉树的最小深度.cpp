@@ -73,5 +73,6 @@ private:
         // 如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。
         if (root->right) {getMinDepth(root->right, level + 1);}
     }
+    // result是全局的, 负责保存最小深度
     int result;
 };
