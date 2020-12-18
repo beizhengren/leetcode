@@ -32,13 +32,15 @@ public:
                 TreeNode* node = stk.top();
                 stk.pop();
                 // pre: m ->l -> r
-                // 注意：不管你以什么顺序访问这棵说，都要交换左右孩子
+                // post: l -> r -> m
+                // mid: l -> mid -> r 
+                // 注意：不管你以pre, post, mid顺序访问这棵说，都要交换左右孩子
                 // 而 注释掉 swap && 将pre换成 m ->r ->l是错误的
                 swap(node->right, node->left);
                 if (node->right) {stk.push(node->right);}
-                if (node->left) {stk.push(node->left);}
                 stk.push(node);
                 stk.push(nullptr);
+                if (node->left) {stk.push(node->left);}
 
             } else {
                 stk.pop();
