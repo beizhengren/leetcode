@@ -24,7 +24,7 @@ public:
 };
 
 // Solution 2
-// 递归
+// 递归 返回值类型int, 因此递归出口返回要么是0, 要么是1.
 class Solution {
 public:
     int minDepth(TreeNode* root) {
@@ -48,4 +48,30 @@ private:
         return min(minL, minR);
     }
 
+};
+
+// Solution 3
+// 递归 返回值类型 void
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        // 这里一定要对 root == nullptr 做特殊处理, 因为result初值是 INT_MAX
+        if (root == nullptr) {return 0;}
+        result = INT_MAX;
+        getMinDepth(root, 0);
+        return result;
+    }
+private:
+    void getMinDepth(TreeNode* root, int level) {
+        if (root == nullptr) {return;}
+        if (root->left == nullptr && root->right == nullptr) {
+            result = min(result, 1 + level);
+            return;
+        }
+        // 只有孩子节点不问空, 才参与最小深度的计算.
+        if (root->left) {getMinDepth(root->left, level + 1);}
+        // 如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。
+        if (root->right) {getMinDepth(root->right, level + 1);}
+    }
+    int result;
 };
