@@ -70,6 +70,51 @@ private:
     string path;
 };
 
+// Solution 3
+// 迭代 双栈 中序
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        if (root == nullptr) {return result;}
+        stack<TreeNode*> stk;
+        stack<string> pathStk;
+        stk.push(root);
+        pathStk.push(to_string(root->val));
+
+        while (!stk.empty()) {
+            if (stk.top()) {
+                TreeNode* node = stk.top();
+                stk.pop();
+                string nodePath = pathStk.top();
+                pathStk.pop();
+                //pre: m l r
+                if (node->right) {
+                    stk.push(node->right);
+                    pathStk.push(nodePath + "->" + to_string(node->right->val));
+                }
+                if (node->left) {
+                    stk.push(node->left);
+                    pathStk.push(nodePath + "->" + to_string(node->left->val));
+                }
+                stk.push(node);
+                stk.push(nullptr);
+                pathStk.push(nodePath);
+            } else {
+                stk.pop();
+                TreeNode* node = stk.top();
+                stk.pop();
+                string nodePath = pathStk.top();
+                pathStk.pop();
+                if (node->left == nullptr && node->right == nullptr) {
+                    result.push_back(nodePath);
+                }
+            }
+        }
+        return result;
+    }
+private:
+    vector<string> result;
+};
 
 
 // Solution 4
