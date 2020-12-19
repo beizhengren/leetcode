@@ -1,6 +1,8 @@
 
 // 题中让求的时所有左叶子节点的和，不是左侧节点！！！
 // 要明确左叶子节点的判断条件。左叶子节点只能由父节点判断，不能由自己判断。
+// Solution 1
+// 迭代
 class Solution {
 public:
     int sumOfLeftLeaves(TreeNode* root) {
@@ -28,7 +30,7 @@ public:
     }
 };
 
-
+// Solution 2
 // 递归
 class Solution {
 public:
@@ -43,4 +45,20 @@ public:
     }
 private:
     int sum = 0;
+};
+
+// Soltion 3
+// 递归
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        // 题中让求的时所有左叶子节点的和，不是左侧节点！！！
+        if (root == nullptr) {return 0;}
+        int sum = 0;
+        sum += sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
+        if (root->left && root->left->left == nullptr && root->left->right == nullptr){
+            sum += root->left->val;
+        }
+        return sum;
+    }
 };
