@@ -27,3 +27,20 @@ public:
         return sum;
     }
 };
+
+
+// 递归
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        // 题中让求的时所有左叶子节点的和，不是左侧节点！！！
+        if (root == nullptr) {return 0;}
+        if (root->left && root->left->left == nullptr && root->left->right == nullptr){
+            sum += root->left->val;
+        }
+        sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
+        return sum;
+    }
+private:
+    int sum = 0;
+};
