@@ -70,3 +70,43 @@ private:
     string path;
 };
 
+
+
+// Solution 4
+// BFS 双队列
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        if (root == nullptr) {return result;}
+        queue<TreeNode*> que;
+        queue<string> pathQue;//队列，用于保存que中的对应节点的路径(状态)
+        que.push(root);
+        pathQue.push(to_string(root->val));
+        while (!que.empty()) {
+            int size = que.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode* node = que.front(); 
+                que.pop();//取出立即弹出
+                string nodePath = pathQue.front();//取出当前节点的路径
+                pathQue.pop();
+                
+                if (node->left) {
+                    que.push(node->left);
+                    // 将新的路径入队，对应当前的node->left
+                    pathQue.push(nodePath + "->" + to_string(node->left->val));
+                }
+                if (node->right) {
+                    que.push(node->right);
+                    pathQue.push(nodePath + "->" + to_string(node->right->val));
+                }
+                if (node->left == nullptr && node->right == nullptr) {
+                    result.push_back(nodePath);
+                    continue;
+                }
+            }
+        }
+        return result;
+    }
+private:
+    vector<string> result;
+};
