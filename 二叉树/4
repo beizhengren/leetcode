@@ -1,0 +1,29 @@
+
+// 题中让求的时所有左叶子节点的和，不是左侧节点！！！
+// 要明确左叶子节点的判断条件。左叶子节点只能由父节点判断，不能由自己判断。
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        if (root == nullptr) {return 0;}
+        int sum = 0;
+        queue<TreeNode*> que;
+        que.push(root);
+        while (!que.empty()) {
+            int size = que.size();
+            for (int i = 0; i < size; ++i) {
+                TreeNode* node = que.front();
+                que.pop();//front之后，一定要pop！
+                if (node->left) {que.push(node->left);}
+                if (node->right) {que.push(node->right);}
+                // 注意”左叶子“节点的判断只能通过父节点来判断
+                if (node->left
+                    && node->left->left == nullptr
+                    && node->left->right == nullptr){
+                        sum += node->left->val;
+                }
+            }
+        }
+
+        return sum;
+    }
+};
