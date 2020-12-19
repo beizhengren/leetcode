@@ -77,7 +77,7 @@ public:
     vector<string> binaryTreePaths(TreeNode* root) {
         if (root == nullptr) {return result;}
         stack<TreeNode*> stk;
-        stack<string> pathStk;
+        stack<string> pathStk;//记录了stk中对应节点的路径（状态）
         stk.push(root);
         pathStk.push(to_string(root->val));
 
@@ -90,6 +90,8 @@ public:
                 //pre: m l r
                 if (node->right) {
                     stk.push(node->right);
+                    // 保存 node->right的路径。
+                    // 这里需要注意的是，node->right保存了它的父亲节点的路径（状态）
                     pathStk.push(nodePath + "->" + to_string(node->right->val));
                 }
                 if (node->left) {
@@ -97,7 +99,7 @@ public:
                     pathStk.push(nodePath + "->" + to_string(node->left->val));
                 }
                 stk.push(node);
-                stk.push(nullptr);
+                stk.push(nullptr);//只有根节点push nullptr
                 pathStk.push(nodePath);
             } else {
                 stk.pop();
@@ -105,6 +107,7 @@ public:
                 stk.pop();
                 string nodePath = pathStk.top();
                 pathStk.pop();
+                // 当前节点是叶子节点
                 if (node->left == nullptr && node->right == nullptr) {
                     result.push_back(nodePath);
                 }
@@ -115,7 +118,6 @@ public:
 private:
     vector<string> result;
 };
-
 
 // Solution 4
 // BFS 双队列
