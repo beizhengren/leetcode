@@ -48,15 +48,16 @@ private:
 // 递归 int型返回值
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-        //注释掉,简化. if (root == nullptr) {return 0;}
-        return getMaxDepth(root);
+    // 确定单层递归的逻辑：先求它的左子树的深度，再求的右子树的深度，最后取左右深度最大的数值 再+1 
+    //（加1是因为算上当前中间节点）就是目前节点为根节点的树的深度。
+    int getDepth(TreeNode* node) {
+        if (node == NULL) return 0;
+        int leftDepth = getDepth(node->left);       // 左
+        int rightDepth = getDepth(node->right);     // 右
+        int depth = 1 + max(leftDepth, rightDepth); // 中
+        return depth;
     }
-private:
-    int getMaxDepth(TreeNode* node) {
-        if (node == nullptr) {return 0;}
-        int maxL = 1 + getMaxDepth(node->left);
-        int maxR = 1 + getMaxDepth(node->right);
-        return max(maxL, maxR);
+    int maxDepth(TreeNode* root) {
+        return getDepth(root);
     }
 };
