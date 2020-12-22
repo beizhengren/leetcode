@@ -72,3 +72,37 @@ public:
 private:
     TreeNode* pre = nullptr;
 };
+
+// Solution 3
+// 迭代 配合全局变量 pre
+class Solution {
+public:
+    //BST 按照中序遍历必然是从小到大的
+    bool isValidBST(TreeNode* root) {
+        if (root == nullptr) {return root;}
+        stack<TreeNode*> stk;
+        stk.push(root);
+        while (!stk.empty()) {
+            if (stk.top() != nullptr) {
+                TreeNode* node = stk.top();
+                stk.pop();
+                //mid: l m r
+                if (node->right) {stk.push(node->right);}
+                stk.push(node);
+                stk.push(nullptr);
+                if (node->left) {stk.push(node->left);}
+            }else {
+                stk.pop();
+                TreeNode* node = stk.top();
+                stk.pop();
+                if (pre != nullptr && pre->val >= node->val) {
+                    return false;
+                }
+                pre = node;// 每次都需要更新
+            }
+        }
+        return true;
+    }
+private:
+    TreeNode* pre = nullptr;
+};
