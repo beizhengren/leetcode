@@ -10,7 +10,7 @@ public:
     }
 
 private:
-    // inorder: 从小到大, 相同的数字是排在一起的
+    // BST 中序遍历: 从小到大, 相同的数字是排在一起的
     void traversal (TreeNode* cur) {
         // 0. 递归终止条件
         if (cur == nullptr) {return;}
