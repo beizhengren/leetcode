@@ -58,4 +58,53 @@ private:
 
 // Solution 2
 // 迭代法
-
+class Solution {
+public:
+    vector<int> findMode(TreeNode* root) {
+        if (root == nullptr) {return result;}
+        TreeNode* pre = nullptr;
+        stack<TreeNode*> stk;
+        stk.push(root);
+        
+        while (!stk.empty()) {
+            if (stk.top()) {
+                TreeNode* cur = stk.top();
+                stk.pop();
+                //inorder: l m r
+                if (cur->right) {stk.push(cur->right);}
+                stk.push(cur);
+                stk.push(nullptr);
+                if (cur->left) {stk.push(cur->left);}
+            } else {
+                stk.pop();
+                TreeNode* cur = stk.top();
+                stk.pop();
+                
+                // 更新count
+                if (pre == nullptr) {
+                    count = 1;
+                } else if (pre->val == cur->val) {
+                    ++count;
+                } else if (pre->val != cur->val) {
+                    count = 1;
+                }
+                // 更新pre
+                pre = cur;
+                // 更新 maxCount 和 result
+                if (count == maxCount) {
+                    result.push_back(cur->val);
+                }
+                if (count > maxCount) {
+                    maxCount = count;
+                    result.clear();
+                    result.push_back(cur->val);
+                }
+            }
+        }
+        return result;
+    }
+private:
+    vector<int> result;
+    int count = 0;
+    int maxCount = 0;
+};
