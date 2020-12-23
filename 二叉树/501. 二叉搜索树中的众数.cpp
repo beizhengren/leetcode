@@ -108,3 +108,41 @@ private:
     int count = 0;
     int maxCount = 0;
 };
+
+// Solution 3
+// 普通二叉树解法 
+// DFS 前中后序都可以
+class Solution {
+public:
+    vector<int> findMode(TreeNode* root) {
+        if (root == nullptr) {return {};}
+        traversal(root);
+        vec.assign(umap.begin(), umap.end());
+        // 按照频率由大到小排序
+        sort(vec.begin(), vec.end(), [](pair<int, int> a, pair<int, int>b ){ return a.second > b.second;});
+        // 存入第一个(最大的)
+        result.push_back(vec[0].first);
+        for (int i = 1; i < vec.size(); ++i) {
+            if (vec[i].second == vec[i-1].second) {
+                result.push_back(vec[i].first);
+                
+            } else {
+                break;
+            }
+        }
+        return result;
+    }
+
+private:
+    
+    void traversal(TreeNode* cur) {
+        if (cur == nullptr) {return;}
+        umap[cur->val]++; //统计频率
+        traversal(cur->left);
+        traversal(cur->right);
+    }
+    // element, times
+    unordered_map<int, int> umap;
+    vector<pair<int, int> > vec;
+    vector<int>result;
+};
