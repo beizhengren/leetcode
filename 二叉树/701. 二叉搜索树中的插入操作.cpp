@@ -1,4 +1,38 @@
-//Solution 3 迭代法
+// Solution 1 
+// DFS 
+// 带有返回值的. 通过递归函数的返回值完成新加入节点和其父节点的赋值操作
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        // 1. 创建节点
+        // 2. 找到 位置
+        // 3. 添加
+        if (root == nullptr) {
+            TreeNode* node = new TreeNode(val);
+            return node;
+        }
+        return insert(root, val);
+    }
+private:
+    // 返回值为插入节点的指针
+    TreeNode* insert(TreeNode* cur, int val) {
+        // 递归终止条件
+        if (cur == nullptr) {
+            TreeNode* node = new TreeNode(val);
+            return node;
+        }
+        // 左 下一层将加入节点返回，本层用root->left或者root->right将其接住
+        if (cur->val > val) {cur->left = insert(cur->left, val);}
+        // 右
+        if (cur->val < val) {cur->right = insert(cur->right, val);}
+        // 中
+        return cur;
+    }  
+};
+
+// Solution 2
+// DFS 不带有返回值
+// Solution 3 迭代法
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode* root, int val) {
