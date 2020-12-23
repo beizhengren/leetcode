@@ -32,6 +32,32 @@ private:
 
 // Solution 2
 // DFS 不带有返回值
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if (root == nullptr) {
+            TreeNode* node = new TreeNode(val);
+            return node;
+        }       
+        traversal(root, val);
+        return root;
+    }
+
+private:
+    void traversal (TreeNode* cur, int val) {
+        if (cur == nullptr) {
+            if (pre->val < val) {pre->right = new TreeNode(val);}
+            if (pre->val > val) {pre->left = new TreeNode(val);}
+            return;
+        }
+        if (cur->val < val) { pre = cur; traversal(cur->right, val);}
+        if (cur->val > val) { pre = cur; traversal(cur->left, val);}
+        return;
+    }
+    TreeNode* pre = nullptr;
+};
+
+
 // Solution 3 迭代法
 class Solution {
 public:
